@@ -1,86 +1,103 @@
-import React from 'react';
-import AuthApiService from '../../services/auth-api-service';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { Input, Required, Label } from '../Form/Form'
+import AuthApiService from '../../services/auth-api-service'
+import UserContext from '../../contexts/UserContext'
+import Button from '../Button/Button'
 
-export default class RegistrationForm extends React.Component {
-  state = { error: null };
+class RegistrationForm extends Component {
+  static defaultProps = {
+    onRegistrationSuccess: () => {}
+  }
 
-  handleFormChange = (event) => {
-    this.setState({ [event.target.id]: event.target.value });
-  };
+  state = { error: null }
 
-  handleRegisterSubmit = (event) => {
-    event.preventDefault();
-    const { username, password } = this.state;
-    this.setState({ error: null });
+  static contextType = UserContext;
 
+  firstInput = React.createRef()
+
+  handleSubmit = ev => {
+    ev.preventDefault()
+    const { name, username, password } = ev.target
     AuthApiService.postUser({
-      user_name: username,
-      password: password,
+      name: name.value,
+      username: username.value,
+      password: password.value,
     })
-      .then((users) => {
-        this.setState({
-          username: '',
-          password: '',
-        });
-
-        this.props.onRegisterSuccess();
+      .then(user => {
+        AuthApiService.postLogin({
+          username: username.value,
+          password: password.value
+        })
+        .then(res => {
+          name.value = ''
+          username.value = ''
+          password.value = ''
+          this.context.processLogin(res.authToken)
+          this.props.onRegistrationSuccess()
+        })
       })
-      .catch((response) => {
-        this.setState({ error: response });
-      });
-  };
+      .catch(res => {
+        this.setState({ error: res.error })
+      })
+  }
+
+  componentDidMount() {
+    this.firstInput.current.focus()
+  }
 
   render() {
-    const passMatch =
-      this.state.password &&
-      this.state.verifyPassword &&
-      this.state.password !== this.state.verifyPassword;
+    const { error } = this.state
     return (
-      <form className="register-form" onSubmit={this.handleRegisterSubmit}>
-        {this.state.error && (
-          <p style={{ color: 'red' }}>{this.state.error.message}</p>
-        )}
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            id="username"
-            required
-            onChange={this.handleFormChange}
-          />
+      <form
+        onSubmit={this.handleSubmit}
+      >
+        <div role='alert'>
+          {error && <p>{error}</p>}
         </div>
         <div>
-          <label htmlFor="password">
-            Password <br />
-            <span className="tiny-text">
-              (must contain at least 1 uppercase, 1 lowercase, 1 number, and 1
-              special character)
-            </span>
-          </label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            onChange={this.handleFormChange}
+          <Label htmlFor='registration-name-input'>
+            Enter your name<Required />
+          </Label>
+          <Input
+            ref={this.firstInput}
+            id='registration-name-input'
+            name='name'
             required
           />
         </div>
         <div>
-          <label htmlFor="verifyPassword">Verify Password</label>
-          <input
-            type="password"
-            name="verify-password"
-            id="verifyPassword"
-            onChange={this.handleFormChange}
+          <Label htmlFor='registration-username-input'>
+            Choose a username<Required />
+          </Label>
+          <Input
+            id='registration-username-input'
+            name='username'
             required
           />
         </div>
-        {passMatch && <p style={{ color: 'red' }}>Passwords must match</p>}
-        <button type="submit" disabled={passMatch}>
-          Sign Up
-        </button>
+        <div>
+          <Label htmlFor='registration-password-input'>
+            Choose a password<Required />
+          </Label>
+          <Input
+            id='registration-password-input'
+            name='password'
+            type='password'
+            required
+          />
+        </div>
+        <footer>
+          <Button type='submit'>
+            Sign up
+          </Button>
+          {' '}
+          <br />
+          <Link to='/login'>Already have an account?</Link>
+        </footer>
       </form>
-    );
+    )
   }
 }
+
+export default RegistrationForm

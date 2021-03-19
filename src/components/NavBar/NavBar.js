@@ -1,16 +1,73 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import TokenService from '../../services/token-service'
+import UserContext from '../../contexts/UserContext'
 
-export default function NavBar() {
-    return (
-        <header>
-            <h1>HappyHabit</h1>
-            <ul>
-                <li><Link to={`/`}>Home</Link></li>
-                <li><Link to={`/`}>Dashboard</Link></li>
-                <li><Link to={`/`}>Create a new entry</Link></li>
-                {/**login, sign up, log out all need to conditionally render */}
-            </ul> 
-        </header>
-    )
+export default class NavBar extends React.Component {
+    static contextType = UserContext
+
+    handleLogoutClick = () => {
+        this.context.processLogout()
+    }
+
+    renderLogoutLink() {
+        return (
+            <div>
+                <span>
+                    <p>{this.context.user.name}</p>
+                </span>
+                <nav className='top-nav'>
+                    <ul className='navigation'>
+                        <li className='nav-item'><Link to={`/`}>Home</Link></li>
+                        <li className='nav-item'><Link to={`/dashboard`}>Dashboard</Link></li>
+                        <li className='nav-item'><Link to={`/entry`}>Create a new entry</Link></li>
+                        <li className='nav-item'>
+                            <Link
+                                onClick={this.handleLogoutClick}
+                                to='/login'>
+                                    Logout
+                                </Link>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        )
+    }
+
+    renderLoginLink() {
+        return (
+            <nav className='top-nav'>
+                <ul className='navigation'>
+                    <li className='nav-item'>
+                        <Link to='/login'>
+                            Login
+                        </Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link to='/register'>
+                            Sign up
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
+        )
+    }
+
+    render() {
+        return (
+            <header>
+                <h1 className='title'>
+                    <Link to='/'>
+                        Happy Habit
+                    </Link>
+                </h1>
+                <nav>
+                    {TokenService.hasAuthToken()
+                        ? this.renderLogoutLink()
+                        : this.renderLoginLink()
+                    }
+                </nav>
+            </header>
+        )
+    }
 }

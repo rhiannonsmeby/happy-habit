@@ -8,16 +8,15 @@ import { Route, Switch } from 'react-router'
 import './App.css'
 import RegistrationPage from '../../routes/RegistrationRoute/RegistrationRoute'
 import LoginPage from '../../routes/LoginRoute/LoginRoute'
+import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute'
 
 class App extends React.Component {
   state = {
-    hasError: false,
-    entries: [],
-    userLoggedIn: false,
+    hasError: false
   }
 
-  setEntries = (entries) => {
-    this.setState({ entries })
+  static getDerivedStateFromError(error) {
+    return {hasError: true}
   }
 
   render() {
@@ -33,9 +32,9 @@ class App extends React.Component {
             <PublicOnlyRoute path={'/login'} component={LoginPage} />
             <PublicOnlyRoute path={'/register'} component={RegistrationPage} />
             <PrivateRoute path={'/dashboard'} component={DashboardRoute} />
+            <Route component={NotFoundRoute} />
           </Switch>
         </main>
-          
       </div>
     );
   }

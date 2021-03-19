@@ -1,61 +1,85 @@
-import React from 'react';
-import AuthApiService from '../../services/auth-api-service';
-import TokenService from '../../services/token-service';
+import React, { Component } from 'react'
+import { Input, Label } from '../Form/Form'
+import AuthApiService from '../../services/auth-api-service'
+import UserContext from '../../contexts/UserContext'
+import Button from '../Button/Button'
 
-export default class LoginForm extends React.Component {
-  state = { error: null };
+class LoginForm extends Component {
+  static defaultProps = {
+    onLoginSuccess: () => { }
+  }
 
-  handleSignIn = (event) => {
-    event.preventDefault();
-    this.setState({ error: null });
-    const user_name = event.target.user_name;
-    const password = event.target.password;
+  static contextType = UserContext
 
-    // send username and password to server
+  state = { error: null }
+
+  firstInput = React.createRef()
+
+  handleSubmit = ev => {
+    ev.preventDefault()
+    const { username, password } = ev.target
+
+    this.setState({ error: null })
+
     AuthApiService.postLogin({
-      user_name: user_name.value,
+      username: username.value,
       password: password.value,
     })
-      .then((res) => {
-        user_name.value = '';
-        password.value = '';
-        TokenService.saveAuthToken(res.token);
-        this.props.handleGoodLogin();
+      .then(res => {
+        username.value = ''
+        password.value = ''
+        this.context.processLogin(res.authToken)
+        this.props.onLoginSuccess()
       })
-      .catch((res) => {
-        this.setState({ error: res.error.message });
-      });
-  };
+      .catch(res => {
+        this.setState({ error: res.error })
+      })
+  }
+
+  componentDidMount() {
+    this.firstInput.current.focus()
+  }
 
   render() {
+    const { error } = this.state
     return (
-      <form className="login-form" onSubmit={this.handleSignIn}>
-        {this.state.error && <p style={{ color: 'red' }}>{this.state.error}</p>}
-
+      <form
+        className='LoginForm'
+        onSubmit={this.handleSubmit}
+      >
+        <div role='alert'>
+          {error && <p>{error}</p>}
+        </div>
         <div>
-          <label htmlFor="username">Username</label>
-          <input
-            placeholder="username"
-            type="text"
-            name="user_name"
-            id="user_name"
+          <Label htmlFor='login-username-input'>
+            Username
+          </Label>
+          <Input
+            ref={this.firstInput}
+            id='login-username-input'
+            name='username'
             required
           />
         </div>
         <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            placeholder="password"
+          <Label htmlFor='login-password-input'>
+            Password
+          </Label>
+          <Input
+            id='login-password-input'
+            name='password'
+            type='password'
             required
           />
         </div>
-        <div className="login-form-button">
-          <button type="submit">Sign In</button>
-        </div>
+        <footer>
+        <Button type='submit'>
+          Login
+        </Button>
+        </footer>
       </form>
-    );
+    )
   }
 }
+
+export default LoginForm
