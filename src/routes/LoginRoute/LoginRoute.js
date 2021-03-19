@@ -1,61 +1,30 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import TokenService from '../../services/token-service';
-import AuthApiService from '../../services/auth-api-service';
+import LoginForm from '../../components/LoginForm/LoginForm';
 
-export default function LoginPage(props) {
+export default class LoginPage extends React.Component {
+  handleGoodLogin = () => {
+    this.props.history.push('my-gifts');
+  };
 
-    function onLoginSuccess() {
-        props.whenLoggedIn();
-
-        const { location, history } = props;
-        const destination = (location.state || {}).from || '/home';
-        history.push(destination);
-    }
-
-    function handleSubmitJwtAuth(e) {
-        e.preventDefault();
-        const { user_name, password } = e.target;
-
-        AuthApiService.postLogin({
-            user_name: user_name.value,
-            password: password.value
-        })
-            .then(res => {
-                user_name.value = '';
-                password.value = '';
-                TokenService.saveAuthToken(res.authToken);
-                onLoginSuccess();
-            })
-            .catch(res => {
-                alert(res.error);
-            })
-    }
-
+  render() {
     return (
-        <div className='sign-in'>
-            <h2>Sign in</h2>
-            <form className='sign-in-form'
-                onSubmit={(e) => handleSubmitJwtAuth(e)}
-            >
-                <div className='form-options'>
-                    <label htmlFor='user_name'>Username</label>
-                    <br />
-                    <input type='text' placeholder='Enter Username' name='user_name' required />
-                </div>
-                <div className='form-options'>
-                    <label htmlFor="password">Password</label>
-                    <br />
-                    <input type="password" placeholder="Enter Password" name="password" required />
-                </div>
-                <br />
-                <button type="submit" className='myButton'>Log in</button>
-                <br />
-                <p>
-                    Don't have an account? <br />
-                    <Link to='/register'>Sign up</Link>
-                </p>
-            </form>
+      <section className="login-section">
+        <h2>Login below:</h2>
+        <LoginForm handleGoodLogin={this.handleGoodLogin} />
+        <h4>
+          Don't have an account yet? <br />
+          <Link to={'/register'}> Click here to register!</Link>
+        </h4>
+        <div className="demo-info">
+          <h4>
+            Want to try it out? <br />
+            Login as a demo user:
+          </h4>
+          <p>U: demo_user</p>
+          <p>P: Password1!</p>
         </div>
-    )
+      </section>
+    );
+  }
 }

@@ -1,13 +1,38 @@
 import React from 'react'
-import NavBar from '../../components/NavBar/NavBar'
+import EntriesService from '../../services/entries-service'
 
-export default class DashboardRoute extends Component {
+class DashboardRoute extends React.Component {
+    state = {
+        entries: [],
+    }
+
+    componentDidMount() {
+        EntriesService.getAllEntries()
+            .then(res => {
+                this.setState({
+                    entries: res.entries
+                })
+            })
+    }
+
     render() {
+        const entriesToShow = this.state.entries.map((entries) => {
+            return (
+                <li key={entries.id} className='display-entries'>
+                    <p>{entries}</p>
+                </li>
+            )
+        })
         return (
-            <div>
-                <NavBar />
-                
-            </div>
-        )
+            <section>
+                <p>Here is your Dashboard:</p>
+                <ul>
+                    {entriesToShow}
+                </ul>
+            </section>
+        );
+        
     }
 }
+
+export default DashboardRoute

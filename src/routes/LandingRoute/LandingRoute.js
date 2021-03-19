@@ -1,14 +1,10 @@
 import React from 'react'
-import DashboardItem from '../../components/DashboardItem/DashboardItem'
-import NavBar from '../../components/NavBar/NavBar'
-import data from '../../json_src/json.json'
+// import DashboardItem from '../../components/DashboardItem/DashboardItem'
+// import data from '../../json_src/json.json'
 
 export default function LandingRoute() {
-    console.log(data)
-
     return (
         <div>
-            <NavBar />
             <main>
                 <section className='heading'>
                     <h2>HappyHabit</h2>
@@ -33,7 +29,7 @@ export default function LandingRoute() {
                     </p>
                 </section>
             </main>
-            {data.data.map(element => <DashboardItem entry={element}/>)}
+            {/* {data.data.map(element => <DashboardItem entry={element}/>)} */}
         </div>
     )
 }
