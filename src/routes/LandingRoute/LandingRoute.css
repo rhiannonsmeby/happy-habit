@@ -1,0 +1,59 @@
+hr {
+    border: 1px solid #CBD2D0;
+    margin: 20px;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+img {
+    display: block;
+    margin: 10px;
+    max-width: 200px;
+    height: auto;
+}
+
+@media all and (min-width: 800px) {
+    .content {
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        max-width: 60%;
+    }
+
+    .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    img {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        max-width: 200px;
+        height: auto;
+    }
+
+    .app-info {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 100px 0px;
+    }
+
+    .app-info h2 {
+        font-size: 36px;
+    }
+    .app-info p {
+        font-size: 24px;
+    }
+}

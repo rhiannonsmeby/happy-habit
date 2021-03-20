@@ -1,3 +1,21 @@
 .App {
   text-align: center;
+  background-color: #FFFDFD;
+  color: #0B3C49;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  background-color: #F0E100;
+  font-size: 20px;
+}
+
+@media all and (min-width: 800px) {
+  button:hover {
+    background-color: #731963;
+    color: #FFFDFD;
+  }
 }

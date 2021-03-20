@@ -1,0 +1,121 @@
+    header {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #731963;
+    }
+  
+    .header {
+      background-color: #731963;
+      margin: 0;
+      position: sticky;
+      top: 0;
+    }
+  
+    h1 a {
+      margin: 0;
+      color: #FFFDFD;
+      padding: 10px;
+      text-align: center;
+    }
+  
+    .title {
+      font-size: 25px;
+      color: #FFFDFD;
+    }
+  
+    .title a {
+      text-decoration: none;
+      color: #FFFDFD;
+    }
+  
+    .navigation {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      min-width: 150px;
+      margin-top: 10px;
+    }
+  
+    li {
+        list-style: none;
+    }
+
+    .nav-item a {
+      text-decoration: none;
+      color: #FFFDFD;
+      font-weight: 600;
+      margin-right: 16px;
+    }
+    .nav-item a:visited {
+      text-decoration: none;
+      font-weight: 600;
+    }
+  
+    .nav-item {
+      font-weight: 600;
+    }
+  
+    .header-nav a,
+    span {
+      padding: 0px 20px;
+    }
+  
+  @media all and (min-width: 800px) {
+    header {
+      padding: 10px 50px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #731963;
+      position: sticky;
+      top: 0;
+    }
+  
+    .title {
+      font-size: 35px;
+      margin: 0;
+    }
+  
+    .title a {
+      text-decoration: none;
+      color: #FFFDFD;
+    }
+  
+    .top-nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      min-width: 200px;
+    }
+  
+    .nav-item {
+      text-decoration: none;
+      font-size: 25px;
+      padding: 10px;
+      color: #FFFDFD;
+    }
+  
+    .nav-item a:hover {
+      background-color: #FFFDFD;
+      color: #731963;
+      transition-duration: 700ms;
+    }
+  
+    .top-nav a:visited {
+      text-decoration: none;
+      font-weight: 600;
+    }
+  
+    .top-nav {
+      font-size: 20px;
+    }
+    .top-nav a {
+      padding: 8px 10px;
+      margin: 0px 10px;
+    }
+  }

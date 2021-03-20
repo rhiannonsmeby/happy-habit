@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import TokenService from '../../services/token-service'
 import UserContext from '../../contexts/UserContext'
+import './NavBar.css'
 
 export default class NavBar extends React.Component {
     static contextType = UserContext
@@ -12,15 +13,12 @@ export default class NavBar extends React.Component {
 
     renderLogoutLink() {
         return (
-            <div>
-                <span>
-                    <p>{this.context.user.name}</p>
-                </span>
+            <header>
                 <nav className='top-nav'>
                     <ul className='navigation'>
                         <li className='nav-item'><Link to={`/`}>Home</Link></li>
                         <li className='nav-item'><Link to={`/dashboard`}>Dashboard</Link></li>
-                        <li className='nav-item'><Link to={`/entry`}>Create a new entry</Link></li>
+                        <li className='nav-item'><Link to={`/entry`}>New Entry</Link></li>
                         <li className='nav-item'>
                             <Link
                                 onClick={this.handleLogoutClick}
@@ -30,7 +28,7 @@ export default class NavBar extends React.Component {
                         </li>
                     </ul>
                 </nav>
-            </div>
+            </header>
         )
     }
 

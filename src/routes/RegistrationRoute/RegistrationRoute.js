@@ -8,7 +8,7 @@ export default class RegistrationPage extends React.Component {
     render() {
         return (
             <section className="register-section">
-                <h2>Register for a HappyHabit account!</h2>
+                <h2>Register for a Happy Habit account!</h2>
                 <RegistrationForm onRegisterSuccess={this.onRegisterSuccess} />
             </section>
         )

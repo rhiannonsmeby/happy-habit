@@ -1,0 +1,34 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 40px;
+    font-size: 10px;
+    color: #FFFDFD;
+    background-color: #731963;
+    margin: 0;
+    position: sticky;
+    top: 0;
+    margin-top: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #FFFDFD;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+p {
+    margin: 5px;
+}
+
+@media all and (min-width: 800px) {
+    footer {
+        display: flex;
+        flex-direction: row;
+    }
+}
