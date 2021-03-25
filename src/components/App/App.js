@@ -11,9 +11,12 @@ import LoginPage from '../../routes/LoginRoute/LoginRoute'
 import EntryRoute from '../../routes/EntryRoute/EntryRoute'
 import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute'
 import Footer from '../Footer/Footer'
+import EntryContext from '../../contexts/EntryContext'
 
 class App extends React.Component {
   state = {
+    user: [],
+    entry: [],
     hasError: false
   }
 
@@ -21,10 +24,53 @@ class App extends React.Component {
     return {hasError: true}
   }
 
+  getEntryData() {
+    fetch(`http://localhost:8000/api/entry`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Something went wrong')
+        }
+        return response.json()
+      })
+      .then(data => {
+        this.setState({
+          entry: data
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  deleteItem = (entryId) => {
+    const filterState = this.state.entry.filter(entry => {
+      return entry.id !== entryId;
+    })
+    this.setState({
+      entry: filterState
+    })
+  }
+
+  addEntry = (newEntry) => {
+    const addEntry = [...this.state.entry, newEntry]
+    this.setState({entry: addEntry})
+  }
+
+  componentDidMount() {
+    this.getEntryData();
+  }
+
   render() {
+    const contextValue = {
+      entry: this.state.entry,
+      deleteItem: this.deleteItem,
+      addEntry: this.addEntry
+    }
     return (
       <div className="App">
         <Route path='/' component={NavBar} />
+        <EntryContext.Provider
+          value={contextValue}>
         <main className="App">
           {this.state.hasError && (
             <p>Oops, looks like there was an error!</p>
@@ -39,6 +85,7 @@ class App extends React.Component {
           </Switch>
         </main>
         <Footer />
+        </EntryContext.Provider>
       </div>
     );
   }

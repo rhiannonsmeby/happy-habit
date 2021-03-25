@@ -1,36 +1,59 @@
 import React from 'react'
-import EntriesService from '../../services/entries-service'
+import Entry from '../../components/Entry/Entry'
+import EntryContext from '../../contexts/EntryContext'
+
 
 class DashboardRoute extends React.Component {
-    state = {
-        entries: [],
-    }
+    static contextType = EntryContext;
+    // state = {
+    //     entries: [],
+    // }
 
-    componentDidMount() {
-        EntriesService.getAllEntries()
-            .then(res => {
-                this.setState({
-                    entries: res.entries
-                })
-            })
-    }
+    // componentDidMount() {
+    //     EntriesService.getUserEntries()
+    //         .then(res => {
+    //             this.setState({
+    //                 entries: res.entry
+    //             })
+    //         })
+    // }
 
     render() {
-        const entriesToShow = this.state.entries.map((entries) => {
+        const {entry} = this.context;
+        const entryMap = entry.map(entry => {
             return (
-                <li key={entries.id} className='display-entries'>
-                    <p>{entries}</p>
-                </li>
+                <Entry
+                    key={entry.id}
+                    id={entry.id}
+                    exercise={entry.exercise}
+                    startMood={entry.start_mood}
+                    endMood={entry.end_mood}
+                    notes={entry.notes}
+                    dateCreated={entry.date_created}
+                    singleEntry={entry}
+                />
             )
-        })
+        });
+        // const entriesToShow = this.state.entry.map((entries) => {
+        //     return (
+        //         <li key={entries.id} className='display-entries'>
+        //             <p>{entries}</p>
+        //         </li>
+        //     )
+        // })
+        // return (
+        //     <section>
+        //         <p>Here is your Dashboard:</p>
+        //         <ul>
+        //             {entriesToShow}
+        //         </ul>
+        //     </section>
+        // );
         return (
-            <section>
-                <p>Here is your Dashboard:</p>
-                <ul>
-                    {entriesToShow}
-                </ul>
-            </section>
-        );
+            <div className='entry-list'>
+                {entryMap}
+            </div>
+        )
         
     }
 }

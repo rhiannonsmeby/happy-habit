@@ -24,7 +24,7 @@ export class UserProvider extends Component {
 
     if (jwtPayload)
       state.user = {
-        id: jwtPayload.user_id,
+        id: jwtPayload.id,
         name: jwtPayload.name,
         username: jwtPayload.sub,
       }
@@ -36,15 +36,11 @@ export class UserProvider extends Component {
   componentDidMount() {
     if (TokenService.hasAuthToken()) {
       IdleService.regiserIdleTimerResets()
-      TokenService.queueCallbackBeforeExpiry(() => {
-        this.fetchRefreshToken()
-      })
     }
   }
 
   componentWillUnmount() {
     IdleService.unRegisterIdleResets()
-    TokenService.clearCallbackBeforeExpiry()
   }
 
   setError = error => {
@@ -64,26 +60,24 @@ export class UserProvider extends Component {
     TokenService.saveAuthToken(authToken)
     const jwtPayload = TokenService.parseAuthToken()
     this.setUser({
-      id: jwtPayload.user_id,
+      id: jwtPayload.id,
       name: jwtPayload.name,
       username: jwtPayload.sub,
     })
     IdleService.regiserIdleTimerResets()
-    TokenService.queueCallbackBeforeExpiry(() => {
-      this.fetchRefreshToken()
-    })
+    // TokenService.queueCallbackBeforeExpiry(() => {
+    //   this.fetchRefreshToken()
+    // })
   }
 
   processLogout = () => {
     TokenService.clearAuthToken()
-    TokenService.clearCallbackBeforeExpiry()
     IdleService.unRegisterIdleResets()
     this.setUser({})
   }
 
   logoutBecauseIdle = () => {
     TokenService.clearAuthToken()
-    TokenService.clearCallbackBeforeExpiry()
     IdleService.unRegisterIdleResets()
     this.setUser({ idle: true })
   }
@@ -92,9 +86,6 @@ export class UserProvider extends Component {
     AuthApiService.refreshToken()
       .then(res => {
         TokenService.saveAuthToken(res.authToken)
-        TokenService.queueCallbackBeforeExpiry(() => {
-          this.fetchRefreshToken()
-        })
       })
       .catch(err => {
         this.setError(err)
