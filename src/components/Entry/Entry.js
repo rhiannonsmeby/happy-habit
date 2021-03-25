@@ -1,7 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import EntryContext from '../../contexts/EntryContext';
+import EntryContext from '../../contexts/EntryContext'
+import './Entry.css'
 
 export default class Entry extends React.Component {
     static contextType = EntryContext
@@ -35,20 +36,19 @@ export default class Entry extends React.Component {
 
         return (
             <div className='entry'>
-                <Link to={`/entry/${this.props.id}`}>
-                    <h2>{this.props.exercise}</h2>
-                    <p>{this.props.id}</p>
+                <Link to={`/dashboard/${this.props.id}`}>
+                    <p className='entry-title'>Coping Exercise:</p>
+                    <h2 className='entry-title'>{this.props.exercise}</h2>
                 </Link>
                 <div className='entry-details'>
-                    <p>
-                        Date Created: {formatDate}
-                    </p>
-                    <p>{this.props.exercise}</p>
-                    <p>{this.props.startMood}</p>
-                    <p>{this.props.endMood}</p>
+                    <p>Before: {this.props.startMood}</p>
+                    <p>After: {this.props.endMood}</p>
+                <div className='entry-details2'>
+                    <p>Date Created: {formatDate}</p>
                     <button onClick={this.deleteButton}>
                         Delete
                     </button>
+                </div>
                 </div>
             </div>
         )

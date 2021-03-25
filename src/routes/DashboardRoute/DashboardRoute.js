@@ -1,6 +1,7 @@
 import React from 'react'
 import Entry from '../../components/Entry/Entry'
 import EntryContext from '../../contexts/EntryContext'
+import {Link} from 'react-router-dom'
 
 
 class DashboardRoute extends React.Component {
@@ -52,6 +53,9 @@ class DashboardRoute extends React.Component {
         return (
             <div className='entry-list'>
                 {entryMap}
+                <Link to='/entry'>
+                        <button className='landing-button'>Create a new entry!</button>
+                </Link>
             </div>
         )
         

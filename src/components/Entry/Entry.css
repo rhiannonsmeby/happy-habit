@@ -1,0 +1,31 @@
+.entry {
+    box-shadow: 0 4px 8px 0 #CBD2D0, 0 6px 20px 0 #CBD2D0;
+    margin: 30px;
+    padding: 5px;
+}
+
+.entry-title {
+    margin-top: 0;
+}
+
+.entry-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 10px;
+}
+
+.entry-details2{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 10px;
+}
+
+.entry-details p {
+    margin: 10px;
+}
+
+h2, p {
+    color: #0B3C49;
+    margin: 0;
+}
