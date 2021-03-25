@@ -1,6 +1,8 @@
 import React from 'react'
 import EntryContext from '../../contexts/EntryContext'
 import {Link} from 'react-router-dom'
+import './AddEntry.css'
+import CrisisPlan from '../CrisisPlan/CrisisPlan';
 
 class AddEntry extends React.Component {
     static contextType = EntryContext;
@@ -23,14 +25,14 @@ class AddEntry extends React.Component {
 
         fetch('http://localhost:8000/api/entry', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 // assignedUser: this.state.assignedUser,
                 exercise: this.state.entryExercise,
-                startMood: this.state.entryStartMood,
-                endMood: this.state.entryEndMood,
+                start_mood: this.state.entryStartMood,
+                end_mood: this.state.entryEndMood,
                 notes: this.state.entryNotes,
-                dateCreated: date_created,
+                date_created: date_created,
             }),
         })
             .then(response => {
@@ -48,7 +50,7 @@ class AddEntry extends React.Component {
                     entryEndMood: '',
                     entryNotes: ''
                 })
-                alert('Your entry has been posted!')
+                // alert('Your entry has been posted!')
             })
             .catch(err => {
                 alert(err);
@@ -78,6 +80,7 @@ class AddEntry extends React.Component {
     render() {
         return (
             <div className='AddEntry'>
+                <section className='entry-section'>
                 <form className='AddEntryForm' onSubmit={e => this.handleSubmit(e)}>
                     <fieldset>
                         <legend>Create a new entry!</legend>
@@ -118,6 +121,10 @@ class AddEntry extends React.Component {
                 <Link to='/dashboard'>
                         <button className='landing-button'>Cancel</button>
                 </Link>
+                </section>
+                <div className='crisis-plan'>
+                <CrisisPlan />
+                </div>
             </div>
         )
     }

@@ -18,6 +18,10 @@ img {
     height: auto;
 }
 
+.landing-title {
+    text-align: center;
+}
+
 @media all and (min-width: 800px) {
     .content {
         display: flex;

@@ -2,6 +2,7 @@ import React from 'react'
 import Entry from '../../components/Entry/Entry'
 import EntryContext from '../../contexts/EntryContext'
 import {Link} from 'react-router-dom'
+import CrisisPlan from '../../components/CrisisPlan/CrisisPlan'
 
 
 class DashboardRoute extends React.Component {
@@ -52,7 +53,13 @@ class DashboardRoute extends React.Component {
         // );
         return (
             <div className='entry-list'>
+                <h2 className='landing-title'>Welcome to Your Dashboard</h2>
+                <p>
+                    Here, you can view all of the entries you have made in the past 
+                    to reflect on which coping exercises you have benefited from the most.    
+                </p>
                 {entryMap}
+                <CrisisPlan />
                 <Link to='/entry'>
                         <button className='landing-button'>Create a new entry!</button>
                 </Link>
