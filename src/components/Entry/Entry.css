@@ -2,6 +2,7 @@
     box-shadow: 0 4px 8px 0 #CBD2D0, 0 6px 20px 0 #CBD2D0;
     margin: 30px;
     padding: 5px;
+    text-align: center;
 }
 
 .entry-title {
@@ -28,4 +29,13 @@
 h2, p {
     color: #0B3C49;
     margin: 0;
+}
+
+@media all and (min-width: 800px) {
+    .entry-details{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin: 10px;
+    }
 }

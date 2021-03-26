@@ -81,6 +81,7 @@ class App extends React.Component {
             <PublicOnlyRoute path={'/register'} component={RegistrationPage} />
             <PrivateRoute path={'/dashboard'} component={DashboardRoute} />
             <PrivateRoute path={'/entry'} component={EntryRoute} />
+            <PrivateRoute path={'/entry/:id'} component={EntryRoute} />
             <Route component={NotFoundRoute} />
           </Switch>
         </main>

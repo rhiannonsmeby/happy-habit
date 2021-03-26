@@ -18,13 +18,13 @@ export default class NavBar extends React.Component {
                     <ul className='navigation'>
                         <li className='nav-item'><Link to={`/`}>Home</Link></li>
                         <li className='nav-item'><Link to={`/dashboard`}>Dashboard</Link></li>
-                        <li className='nav-item'><Link to={`/entry`}>New Entry</Link></li>
+                        <li className='nav-item'><Link to={`/entry`}>Entry</Link></li>
                         <li className='nav-item'>
                             <Link
                                 onClick={this.handleLogoutClick}
                                 to='/login'>
                                     Logout
-                                </Link>
+                            </Link>
                         </li>
                     </ul>
                 </nav>

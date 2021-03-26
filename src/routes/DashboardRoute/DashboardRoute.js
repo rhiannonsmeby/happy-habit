@@ -3,6 +3,7 @@ import Entry from '../../components/Entry/Entry'
 import EntryContext from '../../contexts/EntryContext'
 import {Link} from 'react-router-dom'
 import CrisisPlan from '../../components/CrisisPlan/CrisisPlan'
+import './DashboardRoute.css'
 
 
 class DashboardRoute extends React.Component {

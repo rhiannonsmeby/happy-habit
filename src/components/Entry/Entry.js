@@ -30,25 +30,29 @@ export default class Entry extends React.Component {
             })
     }
 
+    showNotes = () => {
+        return (
+            <p>Notes: {this.props.notes}</p>
+        )
+    }
+
     render() {
         let date = new Date(this.props.dateCreated);
         let formatDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
         return (
             <div className='entry'>
-                <Link to={`/dashboard/${this.props.id}`}>
-                    <p className='entry-title'>Coping Exercise:</p>
+                {/* <Link to={`/dashboard/${this.props.id}`} onClick={this.showNotes}> */}
+                    <button className='entry-title' onClick={() => console.log(`Notes: ${this.props.notes}`)}>Coping Exercise:</button>
                     <h2 className='entry-title'>{this.props.exercise}</h2>
-                </Link>
+                {/* </Link> */}
                 <div className='entry-details'>
                     <p>Before: {this.props.startMood}</p>
                     <p>After: {this.props.endMood}</p>
-                <div className='entry-details2'>
                     <p>Date Created: {formatDate}</p>
                     <button onClick={this.deleteButton}>
                         Delete
                     </button>
-                </div>
                 </div>
             </div>
         )
