@@ -4,3 +4,14 @@
     justify-content: center;
     align-items: center;
 }
+
+h2 {
+    margin-top: 10px;
+}
+
+@media all and (min-width:800px) {
+    p {
+        font-size: 24px;
+        margin: 10px;
+    }
+}

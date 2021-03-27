@@ -7,6 +7,7 @@ const EntryContext = React.createContext ({
     clearError: () => { },
     addEntry: () => { },
     deleteItem: () => { },
+    clickItem: () => { },
 })
 
 export default EntryContext
@@ -26,6 +27,7 @@ export class EntryProvider extends React.Component {
     clearError = () => {
         this.setState({error: null})
     }
+
 
     // setEntry = main => {
     //     this.setState({main, entry: main.entry})

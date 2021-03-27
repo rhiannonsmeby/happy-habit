@@ -26,8 +26,9 @@ a:visited {
     text-decoration: none;
 }
 
-p {
+footer p {
     margin: 5px;
+    font-size: 10px;
 }
 
 @media all and (min-width: 800px) {

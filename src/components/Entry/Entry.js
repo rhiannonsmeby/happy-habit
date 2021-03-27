@@ -6,6 +6,13 @@ import './Entry.css'
 
 export default class Entry extends React.Component {
     static contextType = EntryContext
+    constructor() {
+        super();
+        this.state = {
+            isShow: false
+        }
+        this.renderNotes = this.renderNotes.bind(this);
+      }
 
     deleteButton = (e) => {
         e.stopPropagation();
@@ -30,10 +37,11 @@ export default class Entry extends React.Component {
             })
     }
 
-    showNotes = () => {
-        return (
-            <p>Notes: {this.props.notes}</p>
-        )
+    renderNotes() {
+        // console.log(this.props.notes)
+        this.setState(state => ({
+            isShow: !state.isShow
+        }))
     }
 
     render() {
@@ -43,9 +51,12 @@ export default class Entry extends React.Component {
         return (
             <div className='entry'>
                 {/* <Link to={`/dashboard/${this.props.id}`} onClick={this.showNotes}> */}
-                    <button className='entry-title' onClick={() => console.log(`Notes: ${this.props.notes}`)}>Coping Exercise:</button>
-                    <h2 className='entry-title'>{this.props.exercise}</h2>
+                    <p className='entry-title'>Coping Exercise:</p>
+                    <button className='expand-entry' onClick={this.renderNotes}>
+                        <h2 className='entry-title'>{this.props.exercise}</h2>
+                    </button>
                 {/* </Link> */}
+                {this.state.isShow && <p>Notes: {this.props.notes}</p>}
                 <div className='entry-details'>
                     <p>Before: {this.props.startMood}</p>
                     <p>After: {this.props.endMood}</p>

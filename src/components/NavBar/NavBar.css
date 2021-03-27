@@ -103,7 +103,6 @@
     .nav-item a:hover {
       background-color: #FFFDFD;
       color: #731963;
-      transition-duration: 700ms;
     }
   
     .top-nav a:visited {

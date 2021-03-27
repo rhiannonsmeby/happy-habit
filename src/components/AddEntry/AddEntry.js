@@ -94,7 +94,7 @@ class AddEntry extends React.Component {
                 <form className='AddEntryForm' onSubmit={e => this.handleSubmit(e)}>
                     <fieldset>
                         <legend>Entry</legend>
-                        <label htmlFor='startMood'>Mood:</label>
+                        <label htmlFor='startMood'>Log your mood:</label>
                         <br />
                         <div className='mood-options'>
                             <label htmlFor='1'>
@@ -147,13 +147,13 @@ class AddEntry extends React.Component {
                             </label>
                         </div>
                         <br />
-                        <label htmlFor='exercise'>Coping exercise:</label>
+                        <label htmlFor='exercise'>Input the coping exercise you're going to use:</label>
                         <br />
                         <input type='text' name='exercise' id='exercise'
                             value={this.state.entryExercise}
                             onChange={e => this.updateExercise(e.target.value)} />
                         <br />
-                        <label htmlFor='endMood'>Mood after completing your selected coping exercise:</label>
+                        <label htmlFor='endMood'>Log your mood after completing your coping exercise:</label>
                         <br />
                         <div className='mood-options2'>
                             <label htmlFor='9'>

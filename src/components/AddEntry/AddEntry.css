@@ -4,6 +4,19 @@ form {
     margin: 0;
 }
 
+label {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+input {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .mood-options, .mood-options2 {
     display: flex;
     align-items: center;
@@ -15,6 +28,7 @@ form {
     padding: 1px;
     margin: 2px;
 }
+
 
 /* HIDE RADIO */
 [type=radio] { 
@@ -32,4 +46,20 @@ form {
   /* CHECKED STYLES */
   [type=radio]:checked + img {
     outline: 5px solid #731963;
+  }
+
+  @media all and (min-width: 600px) {
+    .mood-options img, .mood-options2 img {
+        width: 60px;
+        padding: 1px;
+        margin: 2px;
+    }
+  }
+
+  @media all and (min-width: 800px) {
+    .mood-options img, .mood-options2 img {
+        width: 90px;
+        padding: 1px;
+        margin: 2px;
+    }
   }

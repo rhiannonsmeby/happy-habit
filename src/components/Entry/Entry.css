@@ -31,11 +31,20 @@ h2, p {
     margin: 0;
 }
 
+.expand-entry {
+    background-color: #FFFDFD;
+    border: 5px solid #731963;
+}
+
 @media all and (min-width: 800px) {
     .entry-details{
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         margin: 10px;
+    }
+    
+    .expand-entry:hover {
+        background-color: #CBD2D0;
     }
 }
