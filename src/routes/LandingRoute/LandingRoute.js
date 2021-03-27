@@ -62,7 +62,7 @@ export default class LandingRoute extends React.Component {
                     <div className='content'>
                         <h2 className='landing-title'>Customize your coping methods</h2>
                         <p>
-                            You can choose a coping exercise from our pre-compiled list, or add other methods that help you in times of stress,
+                            You can add personalized coping methods that help you in times of stress,
                             frustration, uncertantiy, saddness, or whatever else you may be feeling. 
                         </p>
                     </div>

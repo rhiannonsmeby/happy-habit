@@ -38,7 +38,6 @@ export default class Entry extends React.Component {
     }
 
     renderNotes() {
-        // console.log(this.props.notes)
         this.setState(state => ({
             isShow: !state.isShow
         }))
@@ -50,12 +49,10 @@ export default class Entry extends React.Component {
 
         return (
             <div className='entry'>
-                {/* <Link to={`/dashboard/${this.props.id}`} onClick={this.showNotes}> */}
                     <p className='entry-title'>Coping Exercise:</p>
                     <button className='expand-entry' onClick={this.renderNotes}>
                         <h2 className='entry-title'>{this.props.exercise}</h2>
                     </button>
-                {/* </Link> */}
                 {this.state.isShow && <p>Notes: {this.props.notes}</p>}
                 <div className='entry-details'>
                     <p>Before: {this.props.startMood}</p>
