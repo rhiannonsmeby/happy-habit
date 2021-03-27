@@ -7,7 +7,7 @@ const EntriesService = {
             const response = await fetch(`${config.API_ENDPOINT}/entry`, {
                 headers: {
                     'content-type': 'application/json',
-                    Authorization: `bearer ${TokenService.getAuthToken()}`
+                    authorization: `bearer ${TokenService.getAuthToken()}`
                 },
             });
             if (!response.ok) {

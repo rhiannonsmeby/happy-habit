@@ -12,12 +12,16 @@ export default class NavBar extends React.Component {
     }
 
     renderLogoutLink() {
+        function refreshPage() {
+            window.location.reload(false);
+        }
+        
         return (
             <header>
                 <nav className='top-nav'>
                     <ul className='navigation'>
                         <li className='nav-item'><Link to={`/`}>Home</Link></li>
-                        <li className='nav-item'><Link to={`/dashboard`}>Dashboard</Link></li>
+                        <li className='nav-item' onClick={refreshPage}><Link to={`/dashboard`}>Dashboard</Link></li>
                         <li className='nav-item'><Link to={`/entry`}>Entry</Link></li>
                         <li className='nav-item'>
                             <Link

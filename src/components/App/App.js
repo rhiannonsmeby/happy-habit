@@ -12,6 +12,7 @@ import EntryRoute from '../../routes/EntryRoute/EntryRoute'
 import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute'
 import Footer from '../Footer/Footer'
 import EntryContext from '../../contexts/EntryContext'
+import TokenService from '../../services/token-service'
 
 class App extends React.Component {
   state = {
@@ -25,7 +26,11 @@ class App extends React.Component {
   }
 
   getEntryData() {
-    fetch(`http://localhost:8000/api/entry`)
+    fetch(`http://localhost:8000/api/entry`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Something went wrong')

@@ -1,8 +1,8 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import EntryContext from '../../contexts/EntryContext'
 import './Entry.css'
+import TokenService from '../../services/token-service'
 
 export default class Entry extends React.Component {
     static contextType = EntryContext
@@ -20,7 +20,8 @@ export default class Entry extends React.Component {
         fetch(`http://localhost:8000/api/entry/${this.props.id}`, {
             method: 'DELETE',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                Authorization: `Bearer ${TokenService.getAuthToken()}`,
             },
         })
             .then(response => {
@@ -55,8 +56,8 @@ export default class Entry extends React.Component {
                     </button>
                 {this.state.isShow && <p>Notes: {this.props.notes}</p>}
                 <div className='entry-details'>
-                    <p>Before: {this.props.startMood}</p>
-                    <p>After: {this.props.endMood}</p>
+                    <p>Mood Before: {this.props.startMood}</p>
+                    <p>Mood After: {this.props.endMood}</p>
                     <p>Date Created: {formatDate}</p>
                     <button onClick={this.deleteButton}>
                         Delete

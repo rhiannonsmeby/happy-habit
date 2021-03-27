@@ -8,18 +8,6 @@ import './DashboardRoute.css'
 
 class DashboardRoute extends React.Component {
     static contextType = EntryContext;
-    // state = {
-    //     entries: [],
-    // }
-
-    // componentDidMount() {
-    //     EntriesService.getUserEntries()
-    //         .then(res => {
-    //             this.setState({
-    //                 entries: res.entry
-    //             })
-    //         })
-    // }
 
     render() {
         const {entry} = this.context;
@@ -37,21 +25,7 @@ class DashboardRoute extends React.Component {
                 />
             )
         });
-        // const entriesToShow = this.state.entry.map((entries) => {
-        //     return (
-        //         <li key={entries.id} className='display-entries'>
-        //             <p>{entries}</p>
-        //         </li>
-        //     )
-        // })
-        // return (
-        //     <section>
-        //         <p>Here is your Dashboard:</p>
-        //         <ul>
-        //             {entriesToShow}
-        //         </ul>
-        //     </section>
-        // );
+
         return (
             <div className='entry-list'>
                 <h2 className='landing-title'>Welcome to Your Dashboard</h2>

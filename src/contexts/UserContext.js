@@ -65,9 +65,9 @@ export class UserProvider extends Component {
       username: jwtPayload.sub,
     })
     IdleService.regiserIdleTimerResets()
-    // TokenService.queueCallbackBeforeExpiry(() => {
-    //   this.fetchRefreshToken()
-    // })
+    TokenService.queueCallbackBeforeExpiry(() => {
+      this.fetchRefreshToken()
+    })
   }
 
   processLogout = () => {

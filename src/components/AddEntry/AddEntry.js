@@ -11,6 +11,7 @@ import kiss from '../../images/kiss.png'
 import happy from '../../images/happy.png'
 import happy1 from '../../images/happy (1).png'
 import calm from '../../images/calm.png'
+import TokenService from '../../services/token-service'
 
 class AddEntry extends React.Component {
     static contextType = EntryContext;
@@ -18,7 +19,6 @@ class AddEntry extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // assignedUser: '',
             entryExercise: '',
             entryStartMood: '',
             entryEndMood: '',
@@ -33,9 +33,11 @@ class AddEntry extends React.Component {
 
         fetch('http://localhost:8000/api/entry', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json', 
+                Authorization: `Bearer ${TokenService.getAuthToken()}`
+            },
             body: JSON.stringify({
-                // assignedUser: this.state.assignedUser,
                 exercise: this.state.entryExercise,
                 start_mood: this.state.entryStartMood,
                 end_mood: this.state.entryEndMood,
@@ -52,11 +54,10 @@ class AddEntry extends React.Component {
             .then(data => {
                 addEntry(data);
                 this.setState({
-                    // assignedUser: '',
                     entryExercise: '',
                     entryStartMood: '',
                     entryEndMood: '',
-                    entryNotes: ''
+                    entryNotes: '',
                 })
                 alert('Your entry has been posted!')
             })
