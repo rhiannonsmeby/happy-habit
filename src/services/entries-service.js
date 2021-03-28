@@ -7,7 +7,8 @@ const EntriesService = {
             const response = await fetch(`${config.API_ENDPOINT}/entry`, {
                 headers: {
                     'content-type': 'application/json',
-                    authorization: `bearer ${TokenService.getAuthToken()}`
+                    authorization: `bearer ${TokenService.getAuthToken()}`,
+                    'Access-Control-Allow-Origin': 'https://git.heroku.com/fathomless-cliffs-34718.git/api/entry'
                 },
             });
             if (!response.ok) {

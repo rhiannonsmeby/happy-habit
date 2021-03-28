@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### Live App: 
+### Live App: https://happy-habit.vercel.app/
 ### Server Repo: https://github.com/rhiannonsmeby/happy-habit-server
 
 ### Screenshots

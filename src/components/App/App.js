@@ -26,9 +26,10 @@ class App extends React.Component {
   }
 
   getEntryData() {
-    fetch(`http://localhost:8000/api/entry`, {
+    fetch(`https://git.heroku.com/fathomless-cliffs-34718.git/api/entry`, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
+        'Access-Control-Allow-Origin': 'https://git.heroku.com/fathomless-cliffs-34718.git/api/entry'
       },
     })
       .then(response => {

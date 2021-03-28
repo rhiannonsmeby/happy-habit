@@ -31,11 +31,12 @@ class AddEntry extends React.Component {
         const { addEntry } = this.context;
         const date_created = new Date().toISOString
 
-        fetch('http://localhost:8000/api/entry', {
+        fetch('https://git.heroku.com/fathomless-cliffs-34718.git/api/entry', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json', 
-                Authorization: `Bearer ${TokenService.getAuthToken()}`
+                Authorization: `Bearer ${TokenService.getAuthToken()}`,
+                'Access-Control-Allow-Origin': 'https://git.heroku.com/fathomless-cliffs-34718.git/api/entry'
             },
             body: JSON.stringify({
                 exercise: this.state.entryExercise,

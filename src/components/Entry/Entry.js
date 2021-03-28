@@ -17,11 +17,12 @@ export default class Entry extends React.Component {
     deleteButton = (e) => {
         e.stopPropagation();
         const {deleteItem} = this.context;
-        fetch(`http://localhost:8000/api/entry/${this.props.id}`, {
+        fetch(`https://git.heroku.com/fathomless-cliffs-34718.git/api/entry/${this.props.id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
                 Authorization: `Bearer ${TokenService.getAuthToken()}`,
+                'Access-Control-Allow-Origin': 'https://git.heroku.com/fathomless-cliffs-34718.git/api/entry'
             },
         })
             .then(response => {
