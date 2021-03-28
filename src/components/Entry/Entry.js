@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import EntryContext from '../../contexts/EntryContext'
 import './Entry.css'
 import TokenService from '../../services/token-service'
+import config from '../../config'
 
 export default class Entry extends React.Component {
     static contextType = EntryContext
@@ -17,12 +18,11 @@ export default class Entry extends React.Component {
     deleteButton = (e) => {
         e.stopPropagation();
         const {deleteItem} = this.context;
-        fetch(`https://git.heroku.com/fathomless-cliffs-34718.git/api/entry/${this.props.id}`, {
+        fetch(`${config.API_ENDPOINT}/entry/${this.props.id}`, {
             method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
                 Authorization: `Bearer ${TokenService.getAuthToken()}`,
-                'Access-Control-Allow-Origin': 'https://git.heroku.com/fathomless-cliffs-34718.git/api/entry'
             },
         })
             .then(response => {

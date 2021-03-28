@@ -12,6 +12,7 @@ import happy from '../../images/happy.png'
 import happy1 from '../../images/happy (1).png'
 import calm from '../../images/calm.png'
 import TokenService from '../../services/token-service'
+import config from '../../config'
 
 class AddEntry extends React.Component {
     static contextType = EntryContext;
@@ -31,12 +32,11 @@ class AddEntry extends React.Component {
         const { addEntry } = this.context;
         const date_created = new Date().toISOString
 
-        fetch('https://git.heroku.com/fathomless-cliffs-34718.git/api/entry', {
+        fetch(`${config.API_ENDPOINT}/entry`, {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json', 
                 Authorization: `Bearer ${TokenService.getAuthToken()}`,
-                'Access-Control-Allow-Origin': 'https://git.heroku.com/fathomless-cliffs-34718.git/api/entry'
             },
             body: JSON.stringify({
                 exercise: this.state.entryExercise,

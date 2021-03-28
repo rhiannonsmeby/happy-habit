@@ -1,5 +1,5 @@
 const config = {
-    API_ENDPOINT: 'https://git.heroku.com/fathomless-cliffs-34718.git/api',
+    API_ENDPOINT: `https://enigmatic-garden-21805.herokuapp.com/api`,
     TOKEN_KEY: 'happy-habit-client-auth-token'
 }
 

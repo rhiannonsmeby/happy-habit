@@ -8,7 +8,6 @@ const EntriesService = {
                 headers: {
                     'content-type': 'application/json',
                     authorization: `bearer ${TokenService.getAuthToken()}`,
-                    'Access-Control-Allow-Origin': 'https://git.heroku.com/fathomless-cliffs-34718.git/api/entry'
                 },
             });
             if (!response.ok) {

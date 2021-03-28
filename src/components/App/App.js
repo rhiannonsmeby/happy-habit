@@ -13,6 +13,7 @@ import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute'
 import Footer from '../Footer/Footer'
 import EntryContext from '../../contexts/EntryContext'
 import TokenService from '../../services/token-service'
+import config from '../../config'
 
 class App extends React.Component {
   state = {
@@ -26,10 +27,10 @@ class App extends React.Component {
   }
 
   getEntryData() {
-    fetch(`https://git.heroku.com/fathomless-cliffs-34718.git/api/entry`, {
+    fetch(`${config.API_ENDPOINT}/entry`, {
       headers: {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
-        'Access-Control-Allow-Origin': 'https://git.heroku.com/fathomless-cliffs-34718.git/api/entry'
+        'Access-Control-Allow-Origin': '*',
       },
     })
       .then(response => {
