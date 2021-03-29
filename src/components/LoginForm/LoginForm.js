@@ -21,6 +21,7 @@ class LoginForm extends Component {
 
     this.setState({ error: null });
 
+    //send username and password to server
     AuthApiService.postLogin({
       username: username.value,
       password: password.value,
