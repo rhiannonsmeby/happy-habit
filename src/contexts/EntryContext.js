@@ -17,6 +17,7 @@ export class EntryProvider extends React.Component {
         main: {},
         entry: [],
         error: null,
+        setEntries: () => {}
     }
 
     setError = error => {
@@ -27,15 +28,6 @@ export class EntryProvider extends React.Component {
     clearError = () => {
         this.setState({error: null})
     }
-
-
-    // setEntry = main => {
-    //     this.setState({main, entry: main.entry})
-    // }
-
-    // clearEntry = () => {
-    //     this.setState({entry: {}})
-    // }
 
     render() {
         const value = {

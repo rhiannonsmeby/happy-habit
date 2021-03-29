@@ -1,9 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import EntryContext from '../../contexts/EntryContext'
-import './Entry.css'
-import TokenService from '../../services/token-service'
-import config from '../../config'
+import React from 'react';
+import PropTypes from 'prop-types';
+import EntryContext from '../../contexts/EntryContext';
+import EntryApiService from '../../services/entry-api-service';
+import './Entry.css';
 
 export default class Entry extends React.Component {
     static contextType = EntryContext
@@ -13,24 +12,12 @@ export default class Entry extends React.Component {
             isShow: false
         }
         this.renderNotes = this.renderNotes.bind(this);
-      }
-
+      };
+      
     deleteButton = (e) => {
         e.stopPropagation();
         const {deleteItem} = this.context;
-        fetch(`${config.API_ENDPOINT}/entry/${this.props.id}`, {
-            method: 'DELETE',
-            headers: {
-                'content-type': 'application/json',
-                Authorization: `Bearer ${TokenService.getAuthToken()}`,
-            },
-        })
-            .then(response => {
-                if(!response.ok) {
-                    throw new Error('There was an error in deletion')
-                }
-                return response
-            })
+        EntryApiService.deleteEntry(this.props.id)
             .then(() => {
                 deleteItem(this.props.id)
             })
@@ -42,8 +29,8 @@ export default class Entry extends React.Component {
     renderNotes() {
         this.setState(state => ({
             isShow: !state.isShow
-        }))
-    }
+        }));
+    };
 
     render() {
         let date = new Date(this.props.dateCreated);
@@ -65,18 +52,15 @@ export default class Entry extends React.Component {
                     </button>
                 </div>
             </div>
-        )
+        );
     }
 }
 
 Entry.propTypes = {
     id: PropTypes
-        .number
-        .isRequired,
+        .number,
     dateCreated: PropTypes
-        .string
-        .isRequired,
+        .string,
     exercise: PropTypes
-        .string
-        .isRequired,
+        .string,
 }

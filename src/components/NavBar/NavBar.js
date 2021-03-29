@@ -1,8 +1,8 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import TokenService from '../../services/token-service'
-import UserContext from '../../contexts/UserContext'
-import './NavBar.css'
+import React from 'react';
+import {Link} from 'react-router-dom';
+import TokenService from '../../services/token-service';
+import UserContext from '../../contexts/UserContext';
+import './NavBar.css';
 
 export default class NavBar extends React.Component {
     static contextType = UserContext
@@ -33,7 +33,7 @@ export default class NavBar extends React.Component {
                     </ul>
                 </nav>
             </header>
-        )
+        );
     }
 
     renderLoginLink() {
@@ -52,7 +52,7 @@ export default class NavBar extends React.Component {
                     </li>
                 </ul>
             </nav>
-        )
+        );
     }
 
     render() {
@@ -70,6 +70,6 @@ export default class NavBar extends React.Component {
                     }
                 </nav>
             </header>
-        )
+        );
     }
 }

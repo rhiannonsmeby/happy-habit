@@ -1,11 +1,11 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import smartphone from '../../images/smartphone.png'
-import activity from '../../images/activity.png'
-import list from '../../images/list.png'
-import './LandingRoute.css'
-import UserContext from '../../contexts/UserContext'
-import TokenService from '../../services/token-service'
+import React from 'react';
+import {Link} from 'react-router-dom';
+import smartphone from '../../images/smartphone.png';
+import activity from '../../images/activity.png';
+import list from '../../images/list.png';
+import './LandingRoute.css';
+import UserContext from '../../contexts/UserContext';
+import TokenService from '../../services/token-service';
 
 export default class LandingRoute extends React.Component {
     static contextType = UserContext
@@ -24,7 +24,7 @@ export default class LandingRoute extends React.Component {
                         <button className='landing-button'>Login</button>
                     </Link>
             </section>
-        )
+        );
     }
 
     renderGetStarted() {
@@ -35,7 +35,7 @@ export default class LandingRoute extends React.Component {
                         <button className='landing-button'>Get started!</button>
                     </Link>
             </section>
-        )
+        );
     }
 
     render() {
@@ -89,8 +89,7 @@ export default class LandingRoute extends React.Component {
                     }
                 </div>
             </main>
-            {/* {data.data.map(element => <DashboardItem entry={element}/>)} */}
         </div>
-    )
+    );
     }
 }

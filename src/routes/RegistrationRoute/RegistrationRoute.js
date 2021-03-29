@@ -1,5 +1,5 @@
 import React from 'react';
-import RegistrationForm from '../../components/RegistrationForm/RegistrationForm'
+import RegistrationForm from '../../components/RegistrationForm/RegistrationForm';
 
 export default class RegistrationPage extends React.Component {
     onRegisterSuccess = () => {
@@ -11,6 +11,6 @@ export default class RegistrationPage extends React.Component {
                 <h2>Register for a Happy Habit account!</h2>
                 <RegistrationForm onRegisterSuccess={this.onRegisterSuccess} />
             </section>
-        )
+        );
     }
 }

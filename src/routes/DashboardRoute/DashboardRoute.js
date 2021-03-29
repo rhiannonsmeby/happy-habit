@@ -1,17 +1,28 @@
-import React from 'react'
-import Entry from '../../components/Entry/Entry'
-import EntryContext from '../../contexts/EntryContext'
-import {Link} from 'react-router-dom'
-import CrisisPlan from '../../components/CrisisPlan/CrisisPlan'
-import './DashboardRoute.css'
+import React from 'react';
+import Entry from '../../components/Entry/Entry';
+import EntryContext from '../../contexts/EntryContext';
+import {Link} from 'react-router-dom';
+import CrisisPlan from '../../components/CrisisPlan/CrisisPlan';
+import './DashboardRoute.css';
+import EntryApiService from '../../services/entry-api-service';
 
 
 class DashboardRoute extends React.Component {
     static contextType = EntryContext;
 
+    componentDidMount() {
+        EntryApiService.getEntryData()
+            .then((entry) => {
+                this.context.setEntries(entry);
+            })
+            .catch((error) => {
+                this.setState({error})
+            });
+    }
+
     render() {
         const {entry} = this.context;
-        const entryMap = entry.map(entry => {
+        const entryMap = entry.map((entry) => {
             return (
                 <Entry
                     key={entry.id}
@@ -23,7 +34,7 @@ class DashboardRoute extends React.Component {
                     dateCreated={entry.date_created}
                     singleEntry={entry}
                 />
-            )
+            );
         });
 
         return (
@@ -39,7 +50,7 @@ class DashboardRoute extends React.Component {
                         <button className='landing-button'>Create a new entry!</button>
                 </Link>
             </div>
-        )
+        );
         
     }
 }

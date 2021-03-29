@@ -1,24 +1,24 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { Input, Required, Label } from '../Form/Form'
-import AuthApiService from '../../services/auth-api-service'
-import UserContext from '../../contexts/UserContext'
-import Button from '../Button/Button'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Input, Required, Label } from '../Form/Form';
+import AuthApiService from '../../services/auth-api-service';
+import UserContext from '../../contexts/UserContext';
+import Button from '../Button/Button';
 
 class RegistrationForm extends Component {
   static defaultProps = {
     onRegistrationSuccess: () => {}
   }
 
-  state = { error: null }
+  state = { error: null };
 
   static contextType = UserContext;
 
-  firstInput = React.createRef()
+  firstInput = React.createRef();
 
   handleSubmit = ev => {
-    ev.preventDefault()
-    const { name, username, password } = ev.target
+    ev.preventDefault();
+    const { name, username, password } = ev.target;
     AuthApiService.postUser({
       name: name.value,
       username: username.value,
@@ -30,17 +30,17 @@ class RegistrationForm extends Component {
           password: password.value
         })
         .then(res => {
-          name.value = ''
-          username.value = ''
-          password.value = ''
-          this.context.processLogin(res.authToken)
-          this.props.onRegistrationSuccess()
+          name.value = '';
+          username.value = '';
+          password.value = '';
+          this.context.processLogin(res.authToken);
+          this.props.onRegistrationSuccess();
         })
       })
       .catch(res => {
         this.setState({ error: res.error })
-      })
-  }
+      });
+  };
 
   componentDidMount() {
     this.firstInput.current.focus()

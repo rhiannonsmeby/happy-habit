@@ -1,18 +1,17 @@
-import React from 'react'
-import EntryContext from '../../contexts/EntryContext'
-import {Link} from 'react-router-dom'
-import './AddEntry.css'
-import CrisisPlan from '../CrisisPlan/CrisisPlan'
-import sad from '../../images/sad.png'
-import sad1 from '../../images/sad (1).png'
-import surprised from '../../images/surprised.png'
-import nervous from '../../images/nervous.png'
-import kiss from '../../images/kiss.png'
-import happy from '../../images/happy.png'
-import happy1 from '../../images/happy (1).png'
-import calm from '../../images/calm.png'
-import TokenService from '../../services/token-service'
-import config from '../../config'
+import React from 'react';
+import EntryContext from '../../contexts/EntryContext';
+import EntryApiService from '../../services/entry-api-service';
+import {Link} from 'react-router-dom';
+import './AddEntry.css';
+import CrisisPlan from '../CrisisPlan/CrisisPlan';
+import sad from '../../images/sad.png';
+import sad1 from '../../images/sad1.png';
+import surprised from '../../images/surprised.png';
+import nervous from '../../images/nervous.png';
+import kiss from '../../images/kiss.png';
+import happy from '../../images/happy.png';
+import happy1 from '../../images/happy1.png';
+import calm from '../../images/calm.png';
 
 class AddEntry extends React.Component {
     static contextType = EntryContext;
@@ -24,34 +23,21 @@ class AddEntry extends React.Component {
             entryStartMood: '',
             entryEndMood: '',
             entryNotes: '',
-        }
+        };
     }
 
     handleSubmit = e => {
         e.preventDefault();
         const { addEntry } = this.context;
-        const date_created = new Date().toISOString
-
-        fetch(`${config.API_ENDPOINT}/entry`, {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json', 
-                Authorization: `Bearer ${TokenService.getAuthToken()}`,
-            },
-            body: JSON.stringify({
-                exercise: this.state.entryExercise,
-                start_mood: this.state.entryStartMood,
-                end_mood: this.state.entryEndMood,
-                notes: this.state.entryNotes,
-                date_created: date_created,
-            }),
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Could not post the entry. Please try again later')
-                }
-                return response.json();
-            })
+        const date_created = new Date().toISOString;
+        const newEntry = {
+            exercise: this.state.entryExercise,
+            start_mood: this.state.entryStartMood,
+            end_mood: this.state.entryEndMood,
+            notes: this.state.entryNotes,
+            date_created: date_created,
+        };
+        EntryApiService.addEntry(newEntry)
             .then(data => {
                 addEntry(data);
                 this.setState({
@@ -65,27 +51,27 @@ class AddEntry extends React.Component {
             .catch(err => {
                 alert(err);
             })
-    }
+    };
     updateExercise(newExercise) {
         this.setState({
             entryExercise: newExercise
-        })
-    }
+        });
+    };
     updateStartMood(newStartMood) {
         this.setState({
             entryStartMood: newStartMood
-        })
-    }
+        });
+    };
     updateEndMood(newEndMood) {
         this.setState({
             entryEndMood: newEndMood
-        })
-    }
+        });
+    };
     updateNotes(newNote) {
         this.setState({
             entryNotes: newNote
-        })
-    }
+        });
+    };
 
     render() {
         return (

@@ -7,6 +7,6 @@ export default class Entry extends React.Component {
             <div className='create-entry'>
                 <AddEntry />
             </div>
-        )
+        );
     }
 }

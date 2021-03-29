@@ -1,53 +1,32 @@
-import React from 'react'
-import LandingRoute from '../../routes/LandingRoute/LandingRoute'
-import DashboardRoute from '../../routes/DashboardRoute/DashboardRoute'
-import PrivateRoute from '../PrivateRoute/PrivateRoute'
-import PublicOnlyRoute from '../PublicOnlyRoute/PublicOnlyRoute'
-import NavBar from '../NavBar/NavBar'
-import { Route, Switch } from 'react-router'
-import './App.css'
-import RegistrationPage from '../../routes/RegistrationRoute/RegistrationRoute'
-import LoginPage from '../../routes/LoginRoute/LoginRoute'
-import EntryRoute from '../../routes/EntryRoute/EntryRoute'
-import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute'
-import Footer from '../Footer/Footer'
-import EntryContext from '../../contexts/EntryContext'
-import TokenService from '../../services/token-service'
-import config from '../../config'
+import React from 'react';
+import LandingRoute from '../../routes/LandingRoute/LandingRoute';
+import DashboardRoute from '../../routes/DashboardRoute/DashboardRoute';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import PublicOnlyRoute from '../PublicOnlyRoute/PublicOnlyRoute';
+import NavBar from '../NavBar/NavBar';
+import { Route, Switch } from 'react-router';
+import './App.css';
+import RegistrationPage from '../../routes/RegistrationRoute/RegistrationRoute';
+import LoginPage from '../../routes/LoginRoute/LoginRoute';
+import EntryRoute from '../../routes/EntryRoute/EntryRoute';
+import NotFoundRoute from '../../routes/NotFoundRoute/NotFoundRoute';
+import Footer from '../Footer/Footer';
+import EntryContext from '../../contexts/EntryContext';
 
 class App extends React.Component {
   state = {
     user: [],
     entry: [],
-    hasError: false
-  }
+    hasError: false,
+  };
 
   static getDerivedStateFromError(error) {
     return {hasError: true}
-  }
+  };
 
-  getEntryData() {
-    fetch(`${config.API_ENDPOINT}/entry`, {
-      headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-        'Access-Control-Allow-Origin': '*',
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Something went wrong')
-        }
-        return response.json()
-      })
-      .then(data => {
-        this.setState({
-          entry: data
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+  setEntries = (entry) => {
+    this.setState({ entry })
+  };
 
   deleteItem = (entryId) => {
     const filterState = this.state.entry.filter(entry => {
@@ -56,23 +35,21 @@ class App extends React.Component {
     this.setState({
       entry: filterState
     })
-  }
+  };
 
   addEntry = (newEntry) => {
     const addEntry = [...this.state.entry, newEntry]
     this.setState({entry: addEntry})
-  }
-
-  componentDidMount() {
-    this.getEntryData();
-  }
+  };
 
   render() {
     const contextValue = {
       entry: this.state.entry,
+      setEntries: this.setEntries,
       deleteItem: this.deleteItem,
-      addEntry: this.addEntry
-    }
+      addEntry: this.addEntry,
+    };
+
     return (
       <div className="App">
         <Route path='/' component={NavBar} />

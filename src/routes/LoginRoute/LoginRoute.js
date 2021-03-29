@@ -1,5 +1,5 @@
-import React from 'react'
-import LoginForm from '../../components/LoginForm/LoginForm'
+import React from 'react';
+import LoginForm from '../../components/LoginForm/LoginForm';
 
 class LoginRoute extends React.Component {
   static defaultProps = {
@@ -13,7 +13,7 @@ class LoginRoute extends React.Component {
     const { location, history } = this.props
     const destination = (location.state || {}).from || '/'
     history.push(destination)
-  }
+  };
 
   render() {
     return (

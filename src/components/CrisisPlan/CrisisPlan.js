@@ -13,5 +13,5 @@ export default function CrisisPlan() {
                 <li>911</li>
             </ul>
         </div>
-    )
+    );
 }
