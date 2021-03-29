@@ -26,6 +26,8 @@ class AddEntry extends React.Component {
         };
     }
 
+
+    //event handlers for posting an entry
     handleSubmit = e => {
         e.preventDefault();
         const { addEntry } = this.context;
