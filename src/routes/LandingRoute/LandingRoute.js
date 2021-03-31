@@ -14,14 +14,14 @@ export default class LandingRoute extends React.Component {
         return (
             <section className='landing-nav'>
                 <h2 className='landing-title'>Sign up today</h2>
-                    <Link to='/register'>
-                        <button className='landing-button'>Sign me up!</button>
+                    <Link to='/register' className='dashButton'>
+                        Sign me up!
                     </Link>
                 <h2 className='landing-title'>Want to try it out? Login as a demo user!</h2>
                     <p>Username: demo_user</p>
                     <p>Password: Password1!</p>
-                    <Link to='/login'>
-                        <button className='landing-button'>Login</button>
+                    <Link to='/login' className='dashButton'>
+                        Login
                     </Link>
             </section>
         );
@@ -31,8 +31,8 @@ export default class LandingRoute extends React.Component {
         return (
             <section className='landing-nav'>
                 <h2 className='landing-title'>Start keeping track of your coping methods now</h2>
-                    <Link to='/entry'>
-                        <button className='landing-button'>Get started!</button>
+                    <Link to='/entry' className='dashButton'>
+                        Get started!
                     </Link>
             </section>
         );

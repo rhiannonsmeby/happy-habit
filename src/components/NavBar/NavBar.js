@@ -17,7 +17,6 @@ export default class NavBar extends React.Component {
         }
         
         return (
-            <header>
                 <nav className='top-nav'>
                     <ul className='navigation'>
                         <li className='nav-item'><Link to={`/`}>Home</Link></li>
@@ -32,7 +31,6 @@ export default class NavBar extends React.Component {
                         </li>
                     </ul>
                 </nav>
-            </header>
         );
     }
 

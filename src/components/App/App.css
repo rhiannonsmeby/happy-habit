@@ -3,7 +3,7 @@
   color: #0B3C49;
 }
 
-button {
+button, .dashButton {
   margin: 10px;
   padding: 10px 20px;
   cursor: pointer;
@@ -12,8 +12,12 @@ button {
   font-size: 20px;
 }
 
+.dashButton {
+  color: black;
+}
+
 @media all and (min-width: 800px) {
-  button:hover {
+  button:hover, .dashButton:hover {
     background-color: #731963;
     color: #FFFDFD;
   }

@@ -46,8 +46,8 @@ class DashboardRoute extends React.Component {
                 </p>
                 {entryMap}
                 <CrisisPlan />
-                <Link to='/entry'>
-                        <button className='landing-button'>Create a new entry!</button>
+                <Link to='/entry' className='dashButton'>
+                        Create a new entry!
                 </Link>
             </div>
         );
